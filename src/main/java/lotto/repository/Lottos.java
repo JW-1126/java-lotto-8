@@ -12,4 +12,8 @@ public class Lottos {
         lottos.add(lotto);
     }
 
+    public HashSet<Lotto> getLottos() {
+        return new HashSet<>(lottos);
+    }
+
 }
