@@ -7,6 +7,7 @@ import static lotto.view.InputView.inputBonusNumber;
 import static lotto.view.InputView.inputPurchaseMoney;
 import static lotto.view.InputView.inputWinningNumbers;
 
+import lotto.service.LottoService;
 import lotto.validation.BonusNumberValidator;
 import lotto.validation.PurchaseInputValidator;
 import lotto.validation.ValidateStrategy;
@@ -15,10 +16,18 @@ import lotto.view.OutputView;
 
 public class LottoController {
 
+    private final LottoService lottoService;
+
+    public LottoController(LottoService lottoService) {
+        this.lottoService = lottoService;
+    }
+
     public void run() {
-        //구입 금액 입력받기
+
         String purchaseMoney = checkInput(PURCHASE_MONEY, new PurchaseInputValidator());
+
         //로또 생성
+        lottoService.createLotto(Integer.parseInt(purchaseMoney));
 
         //로또 출력
 
@@ -34,7 +43,7 @@ public class LottoController {
         String input;
         do {
             input = callInput(inputType);
-        } while (!check(input, strategy));
+        } while (!isValidated(input, strategy));
 
         return input;
     }
@@ -52,7 +61,7 @@ public class LottoController {
         return null;
     }
 
-    private static boolean check(String input, ValidateStrategy strategy) {
+    private static boolean isValidated(String input, ValidateStrategy strategy) {
         try {
             strategy.validate(input);
             return true;
