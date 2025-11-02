@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,6 +15,9 @@ public class Lotto {
     private void validate(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
+        }
+        if (new HashSet<>(numbers).size() != 6) {
+            throw new IllegalArgumentException("[ERROR] 로또 번호는 중복되지 않아야합니다.");
         }
     }
 
