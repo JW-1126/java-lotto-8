@@ -10,6 +10,8 @@ import static lotto.view.InputView.inputPurchaseMoney;
 import static lotto.view.InputView.inputWinningNumbers;
 import static lotto.view.OutputView.printAll;
 import static lotto.view.OutputView.printLottosHeader;
+import static lotto.view.OutputView.printProfit;
+import static lotto.view.OutputView.printResultHeader;
 
 import java.util.List;
 import lotto.service.LottoService;
@@ -50,7 +52,9 @@ public class LottoController {
         double profit = lottoService.calculateProfit(purchaseMoney);
 
         //당첨 통계 출력
-
+        printResultHeader();
+        printAll(lottoService.gameResult());
+        printProfit(profit);
     }
 
     private static String checkInput(InputType inputType, ValidateStrategy strategy) {

@@ -1,8 +1,10 @@
 package lotto.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.LottoStatistics;
+import lotto.domain.Rank;
 import lotto.domain.number.NumberStrategy;
 import lotto.domain.number.RandomNumber;
 import lotto.repository.Lottos;
@@ -41,7 +43,13 @@ public class LottoService {
         return (double) statistics.totalReward() / purchaseMoney;
     }
 
-    public void gameResult() {
-
+    public List<String> gameResult() {
+        List<String> result = new ArrayList<>();
+        int index = 0;
+        for (Rank rank : Rank.values()) {
+            result.add(rank.getResultLine(statistics.getWinCount(index)));
+            index++;
+        }
+        return result;
     }
 }

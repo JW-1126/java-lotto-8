@@ -22,10 +22,10 @@ public enum Rank {
     public String getResultLine(int count) {
         StringBuilder result = new StringBuilder();
         result.append(matches + "개 일치, ");
-        if (this.equals(MATCH_FIVE_BONUS)) {
+        if (this.equals(MATCH_FIVE_BONUS) && count == 3) {
             result.append("보너스 볼 일치 ");
         }
-        result.append("(" + reward + ") - " + count + "개\n");
+        result.append("(" + reward + "원) - " + count + "개\n");
         return result.toString();
     }
 
