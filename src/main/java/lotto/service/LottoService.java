@@ -20,8 +20,7 @@ public class LottoService {
 
     public void createLotto(int quantity) {
         while (quantity > 0) {
-            lottos.add(new Lotto(strategy.getNumbers()
-                    .stream().sorted().toList()));
+            lottos.add(new Lotto(strategy.getNumbers().stream().sorted().toList()));
             quantity--;
         }
     }

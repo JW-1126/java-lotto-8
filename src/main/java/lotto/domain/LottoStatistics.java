@@ -5,6 +5,7 @@ import java.util.List;
 
 public class LottoStatistics {
 
+    //각 순위의 로또 갯수를 보관 및 관리
     private final List<Integer> winCounts;
 
     public LottoStatistics() {
