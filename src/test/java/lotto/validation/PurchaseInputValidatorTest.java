@@ -12,7 +12,7 @@ class PurchaseInputValidatorTest {
     PurchaseInputValidator validator = new PurchaseInputValidator();
 
     @ParameterizedTest
-    @DisplayName("1000의 배수가 아닌 구입 구매 입력에 대해 예외를 발생시킨다.")
+    @DisplayName("1000의 배수가 아닌 구입 금액 입력에 대해 예외를 발생시킨다.")
     @ValueSource(strings = {"12345", "132"})
     void checkDivided_EmptyInput_ThrowsException(String input) {
         //then
