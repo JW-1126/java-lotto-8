@@ -47,7 +47,7 @@ public class LottoService {
         List<String> result = new ArrayList<>();
         int index = 0;
         for (Rank rank : Rank.values()) {
-            result.add(rank.getResultLine(statistics.getWinCount(index)));
+            result.add(rank.getResultLine(statistics.getWinCount(index), index));
             index++;
         }
         return result;

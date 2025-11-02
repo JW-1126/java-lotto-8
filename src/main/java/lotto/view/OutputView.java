@@ -9,11 +9,11 @@ public class OutputView {
     }
 
     public static void printLottosHeader(int quantity) {
-        System.out.println(quantity + "개를 구매했습니다.");
+        System.out.println("\n" + quantity + "개를 구매했습니다.");
     }
 
     public static void printResultHeader() {
-        System.out.println("당첨 통계\n---");
+        System.out.println("\n당첨 통계\n---");
     }
 
     public static void printAll(List<String> result) {
@@ -21,7 +21,7 @@ public class OutputView {
     }
 
     public static void printProfit(double profit) {
-        System.out.printf("총 수익률은 %.1f%입니다.", profit);
+        System.out.printf("총 수익률은 %.1f%%입니다.", profit);
     }
 
 }
