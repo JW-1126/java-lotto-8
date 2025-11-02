@@ -25,8 +25,8 @@ public class Lotto {
         int index = (int) numbers.stream()
                 .filter(winningNum::contains)
                 .count() - 3;
-        if ((index == 5 && numbers.contains(bonus)) || index == 6) {
-            return index + 1;
+        if ((index == 2 && numbers.contains(bonus)) || index == 3) {
+            index += 1;
         }
         return index;
     }

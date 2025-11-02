@@ -1,5 +1,6 @@
 package lotto.validation;
 
+import static lotto.domain.number.RandomNumber.LOTTO_NUM_RANGE_MAX;
 import static lotto.exception.ErrorCode.EMPTY_INPUT;
 import static lotto.exception.ErrorCode.NO_POSITIVE_INTEGER;
 import static lotto.exception.ErrorCode.OUT_OF_INTEGER_RANGE;
@@ -8,7 +9,6 @@ import static lotto.exception.ErrorCode.OUT_OF_NUMBER_RANGE;
 import java.math.BigInteger;
 
 public abstract class BasicValidator implements ValidateStrategy {
-    public static final int LOTTO_NUM_RANGE_MAX = 45;
 
     @Override
     public void validate(String input) {

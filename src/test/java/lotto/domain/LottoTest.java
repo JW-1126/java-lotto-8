@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -6,7 +6,6 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
-import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -31,7 +30,7 @@ class LottoTest {
     }
 
     @ParameterizedTest
-    @DisplayName("매개변수로 넘어온 리스트와 중복되는 요소의 수를 인덱스로 반환하여 출력한다")
+    @DisplayName("매개변수로 넘어온 리스트와 중복되는 요소의 수를 인덱스로 계산하여 반환한다.")
     @MethodSource("method")
     void matchLottos_CheckInput_ReturnDuplicateCount(List<Integer> numbers) {
         //given

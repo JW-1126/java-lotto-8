@@ -2,7 +2,7 @@ package lotto.validation;
 
 import static lotto.exception.ErrorCode.DUPLICATED_NUMBER;
 import static lotto.exception.ErrorCode.WRONG_NUMBER_COUNT;
-import static lotto.util.Parser.inputParser;
+import static lotto.util.Parser.inputToDivide;
 
 import java.util.HashSet;
 import java.util.List;
@@ -13,7 +13,7 @@ public class WinningNumbersValidator extends BasicValidator {
 
     @Override
     public void validate(String input) {
-        List<String> parsed = inputParser(input);
+        List<String> parsed = inputToDivide(input);
         parsed.forEach(each -> {
             super.validate(each);
             int num = Integer.parseInt(each);
