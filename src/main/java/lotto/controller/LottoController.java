@@ -3,12 +3,15 @@ package lotto.controller;
 import static lotto.controller.InputType.BONUS_NUMBER;
 import static lotto.controller.InputType.PURCHASE_MONEY;
 import static lotto.controller.InputType.WINNING_NUMBERS;
+import static lotto.util.Parser.inputToDivide;
+import static lotto.util.Parser.wordToNumbers;
 import static lotto.view.InputView.inputBonusNumber;
 import static lotto.view.InputView.inputPurchaseMoney;
 import static lotto.view.InputView.inputWinningNumbers;
-import static lotto.view.OutputView.printAllLottos;
+import static lotto.view.OutputView.printAll;
 import static lotto.view.OutputView.printLottosHeader;
 
+import java.util.List;
 import lotto.service.LottoService;
 import lotto.validation.BonusNumberValidator;
 import lotto.validation.PurchaseInputValidator;
@@ -26,22 +29,24 @@ public class LottoController {
     }
 
     public void run() {
-
-        String purchaseMoney = checkInput(PURCHASE_MONEY, new PurchaseInputValidator());
-
+        //구입 금액 입력
+        String purchaseMoneyInput = checkInput(PURCHASE_MONEY, new PurchaseInputValidator());
+        int purchaseMoney = Integer.parseInt(purchaseMoneyInput);
         //로또 생성
-        int purchaseQuantity = Integer.parseInt(purchaseMoney) / UNIT_AMOUNT;
+        int purchaseQuantity = purchaseMoney / UNIT_AMOUNT;
         lottoService.createLotto(purchaseQuantity);
-
         //로또 출력
         printLottosHeader(purchaseQuantity);
-        printAllLottos(lottoService.getLottoNumbers());
+        printAll(lottoService.getLottoNumbers());
 
         //당첨 & 보너스 번호 입력
-        String winningNumbers = checkInput(WINNING_NUMBERS, new WinningNumbersValidator());
-        String bonusNumber = checkInput(BONUS_NUMBER, new BonusNumberValidator());
+        String winningNumbersInput = checkInput(WINNING_NUMBERS, new WinningNumbersValidator());
+        List<Integer> winningNumbers = wordToNumbers(inputToDivide(winningNumbersInput));
+        String bonusNumberInput = checkInput(BONUS_NUMBER, new BonusNumberValidator());
+        Integer bonusNumber = Integer.parseInt(bonusNumberInput);
 
-        //당첨 통계 계산 & 출력
+        //당첨 통계 계산
+        lottoService.lottoGame(winningNumbers, bonusNumber);
     }
 
     private static String checkInput(InputType inputType, ValidateStrategy strategy) {

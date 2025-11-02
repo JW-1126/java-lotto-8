@@ -2,15 +2,17 @@ package lotto.service;
 
 import java.util.List;
 import lotto.domain.Lotto;
+import lotto.domain.LottoStatistics;
 import lotto.domain.number.NumberStrategy;
+import lotto.domain.number.RandomNumber;
 import lotto.repository.Lottos;
 
 public class LottoService {
-    private final NumberStrategy strategy;
     private final Lottos lottos;
+    private final NumberStrategy strategy = new RandomNumber();
+    private final LottoStatistics statistics = new LottoStatistics();
 
-    public LottoService(NumberStrategy strategy, Lottos lottos) {
-        this.strategy = strategy;
+    public LottoService(Lottos lottos) {
         this.lottos = lottos;
     }
 
@@ -28,4 +30,14 @@ public class LottoService {
                 .toList();
     }
 
+    public void lottoGame(List<Integer> numbers, int bonus) {
+        for (Lotto lotto : lottos.getLottos()) {
+            int rank = lotto.matchLottos(numbers, bonus);
+            statistics.addWinCount(rank);
+        }
+    }
+
+    public void gameResult() {
+
+    }
 }

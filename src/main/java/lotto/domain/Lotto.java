@@ -21,6 +21,16 @@ public class Lotto {
         }
     }
 
+    public int matchLottos(List<Integer> winningNum, int bonus) {
+        int index = (int) numbers.stream()
+                .filter(winningNum::contains)
+                .count() - 3;
+        if ((index == 5 && numbers.contains(bonus)) || index == 6) {
+            return index + 1;
+        }
+        return index;
+    }
+
     @Override
     public String toString() {
         return numbers.stream()
