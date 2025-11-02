@@ -9,6 +9,7 @@ import static lotto.view.InputView.inputBonusNumber;
 import static lotto.view.InputView.inputPurchaseMoney;
 import static lotto.view.InputView.inputWinningNumbers;
 import static lotto.view.OutputView.printAll;
+import static lotto.view.OutputView.printError;
 import static lotto.view.OutputView.printLottosHeader;
 import static lotto.view.OutputView.printProfit;
 import static lotto.view.OutputView.printResultHeader;
@@ -19,7 +20,6 @@ import lotto.validation.BonusNumberValidator;
 import lotto.validation.PurchaseInputValidator;
 import lotto.validation.ValidateStrategy;
 import lotto.validation.WinningNumbersValidator;
-import lotto.view.OutputView;
 
 public class LottoController {
 
@@ -31,27 +31,40 @@ public class LottoController {
     }
 
     public void run() {
-        //구입 금액 입력
-        String purchaseMoneyInput = checkInput(PURCHASE_MONEY, new PurchaseInputValidator());
-        int purchaseMoney = Integer.parseInt(purchaseMoneyInput);
-        //로또 생성
+
+        int purchaseMoney = getPurchaseMoney();
         int purchaseQuantity = purchaseMoney / UNIT_AMOUNT;
         lottoService.createLotto(purchaseQuantity);
-        //로또 출력
-        printLottosHeader(purchaseQuantity);
-        printAll(lottoService.getLottoNumbers());
+        printLottos(purchaseQuantity);
 
-        //당첨 & 보너스 번호 입력
-        String winningNumbersInput = checkInput(WINNING_NUMBERS, new WinningNumbersValidator());
-        List<Integer> winningNumbers = wordToNumbers(inputToDivide(winningNumbersInput));
-        String bonusNumberInput = checkInput(BONUS_NUMBER, new BonusNumberValidator());
-        Integer bonusNumber = Integer.parseInt(bonusNumberInput);
-
-        //당첨 통계 계산
+        List<Integer> winningNumbers = getWinningNumbers();
+        Integer bonusNumber = getBonusNumber();
         lottoService.recordStatistic(winningNumbers, bonusNumber);
         double profit = lottoService.calculateProfit(purchaseMoney);
+        printResult(profit);
+    }
 
-        //당첨 통계 출력
+    private static int getPurchaseMoney() {
+        String purchaseMoneyInput = checkInput(PURCHASE_MONEY, new PurchaseInputValidator());
+        return Integer.parseInt(purchaseMoneyInput);
+    }
+
+    private static List<Integer> getWinningNumbers() {
+        String winningNumbersInput = checkInput(WINNING_NUMBERS, new WinningNumbersValidator());
+        return wordToNumbers(inputToDivide(winningNumbersInput));
+    }
+
+    private static Integer getBonusNumber() {
+        String bonusNumberInput = checkInput(BONUS_NUMBER, new BonusNumberValidator());
+        return Integer.parseInt(bonusNumberInput);
+    }
+
+    private void printLottos(int purchaseQuantity) {
+        printLottosHeader(purchaseQuantity);
+        printAll(lottoService.getLottoNumbers());
+    }
+
+    private void printResult(double profit) {
         printResultHeader();
         printAll(lottoService.gameResult());
         printProfit(profit);
@@ -84,7 +97,7 @@ public class LottoController {
             strategy.validate(input);
             return true;
         } catch (IllegalArgumentException e) {
-            OutputView.printError(e);
+            printError(e);
             return false;
         }
     }
