@@ -21,7 +21,8 @@ public class Lotto {
         }
     }
 
-    public int matchLottos(List<Integer> winningNum, int bonus) {
+    //당첨 번호와 일치하는 갯수를 순위 리스트의 인덱스로 변환하여 반환한다. 5~1등 -> index 0~4
+    public int matchLottoToWinNum(List<Integer> winningNum, int bonus) {
         int index = (int) numbers.stream()
                 .filter(winningNum::contains)
                 .count() - 3;

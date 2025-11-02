@@ -34,7 +34,7 @@ public class LottoService {
 
     public void recordStatistic(List<Integer> numbers, int bonus) {
         for (Lotto lotto : lottos.getLottos()) {
-            int rank = lotto.matchLottos(numbers, bonus);
+            int rank = lotto.matchLottoToWinNum(numbers, bonus);
             statistics.addWinCount(rank);
         }
     }

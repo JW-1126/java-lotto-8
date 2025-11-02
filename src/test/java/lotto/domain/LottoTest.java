@@ -32,12 +32,12 @@ class LottoTest {
     @ParameterizedTest
     @DisplayName("매개변수로 넘어온 리스트와 중복되는 요소의 수를 인덱스로 계산하여 반환한다.")
     @MethodSource("method")
-    void matchLottos_CheckInput_ReturnDuplicateCount(List<Integer> numbers) {
+    void matchLottoToWinNum_CheckInput_ReturnDuplicateCount(List<Integer> numbers) {
         //given
         Lotto lotto = new Lotto(List.of(1, 2, 3, 4, 5, 6));
 
         //then
-        assertThat(lotto.matchLottos(numbers, 0)).isEqualTo(4);
+        assertThat(lotto.matchLottoToWinNum(numbers, 0)).isEqualTo(4);
     }
 
     // TODO: 추가 기능 구현에 따른 테스트 코드 작성
