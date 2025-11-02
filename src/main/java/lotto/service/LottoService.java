@@ -1,5 +1,6 @@
 package lotto.service;
 
+import java.util.List;
 import lotto.domain.Lotto;
 import lotto.domain.number.NumberStrategy;
 import lotto.repository.Lottos;
@@ -19,6 +20,12 @@ public class LottoService {
                     .stream().sorted().toList()));
             quantity--;
         }
+    }
+
+    public List<String> getLottoNumbers() {
+        return lottos.getLottos().stream()
+                .map(Lotto::toString)
+                .toList();
     }
 
 }
