@@ -18,4 +18,18 @@ public class LottoStatistics {
         winCounts.set(rank, winCounts.get(rank) + 1);
     }
 
+    public int getWinCount(int rank) {
+        return winCounts.get(rank);
+    }
+
+    public long totalReward() {
+        int index = 0;
+        long reward = 0;
+        for (Rank rank : Rank.values()) {
+            reward += rank.getReward(winCounts.get(index));
+            index++;
+        }
+        return reward;
+    }
+
 }

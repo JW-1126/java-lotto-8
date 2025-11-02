@@ -46,7 +46,11 @@ public class LottoController {
         Integer bonusNumber = Integer.parseInt(bonusNumberInput);
 
         //당첨 통계 계산
-        lottoService.lottoGame(winningNumbers, bonusNumber);
+        lottoService.recordStatistic(winningNumbers, bonusNumber);
+        double profit = lottoService.calculateProfit(purchaseMoney);
+
+        //당첨 통계 출력
+
     }
 
     private static String checkInput(InputType inputType, ValidateStrategy strategy) {

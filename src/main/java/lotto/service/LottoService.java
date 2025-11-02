@@ -30,11 +30,15 @@ public class LottoService {
                 .toList();
     }
 
-    public void lottoGame(List<Integer> numbers, int bonus) {
+    public void recordStatistic(List<Integer> numbers, int bonus) {
         for (Lotto lotto : lottos.getLottos()) {
             int rank = lotto.matchLottos(numbers, bonus);
             statistics.addWinCount(rank);
         }
+    }
+
+    public double calculateProfit(int purchaseMoney) {
+        return (double) statistics.totalReward() / purchaseMoney;
     }
 
     public void gameResult() {
