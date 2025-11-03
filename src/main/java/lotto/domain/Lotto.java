@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -34,9 +33,6 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return numbers.stream()
-                .map(String::valueOf)
-                .collect(Collectors.joining(", ", "[", "]"));
+        return numbers.toString();
     }
-
 }
